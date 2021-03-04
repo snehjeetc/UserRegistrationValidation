@@ -10,4 +10,8 @@ public class UserValidator {
         return pattern.matcher(firstName).matches();
     }
 
+    public boolean validateLastName(String lastName){
+        Pattern pattern = Pattern.compile(VALID_NAME_REGEX);
+        return pattern.matcher(lastName).matches();
+    }
 }
