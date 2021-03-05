@@ -9,28 +9,38 @@ public class UserValidator {
     private final String VALID_PASSWORD_REGEX = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=[^$@!#%*?&]*[$#@!%*?&][^$@!#%*?&]*$).{8,}";
 
 
-    public boolean validateFirstName(String firstName){
+    public boolean validateFirstName(String firstName) throws UserValidationException{
         Pattern pattern = Pattern.compile(VALID_NAME_REGEX);
-        return pattern.matcher(firstName).matches();
+        if(!pattern.matcher(firstName).matches())
+            throw new UserValidationException(UserValidationException.ValidationExceptionType.INVALID_FIRST_NAME, "Invalid first name");
+        return true;
     }
 
-    public boolean validateLastName(String lastName){
+    public boolean validateLastName(String lastName) throws UserValidationException{
         Pattern pattern = Pattern.compile(VALID_NAME_REGEX);
-        return pattern.matcher(lastName).matches();
+        if(!pattern.matcher(lastName).matches())
+            throw new UserValidationException(UserValidationException.ValidationExceptionType.INVALID_LAST_NAME, "Invalid last name");
+        return true;
     }
 
-    public boolean validateEmail(String email){
+    public boolean validateEmail(String email) throws UserValidationException{
         Pattern pattern = Pattern.compile(VALID_EMAIL_REGEX);
-        return pattern.matcher(email).matches();
+        if(!pattern.matcher(email).matches())
+            throw new UserValidationException(UserValidationException.ValidationExceptionType.INVALID_EMAIL, "Invalid email id");
+        return true;
     }
 
-    public boolean validatePhoneNumber(String phoneNumber){
+    public boolean validatePhoneNumber(String phoneNumber) throws UserValidationException{
         Pattern pattern = Pattern.compile(VALID_PHONENUMBER_REGEX);
-        return pattern.matcher(phoneNumber).matches();
+        if(!pattern.matcher(phoneNumber).matches())
+            throw new UserValidationException(UserValidationException.ValidationExceptionType.INVALID_PHONE_NUMBER, "Invalid phone number");
+        return true;
     }
 
-    public boolean validatePassword(String password){
+    public boolean validatePassword(String password) throws UserValidationException{
         Pattern pattern = Pattern.compile(VALID_PASSWORD_REGEX);
-        return pattern.matcher(password).matches();
+        if(!pattern.matcher(password).matches())
+            throw new UserValidationException(UserValidationException.ValidationExceptionType.INVALID_PASSWORD, "Invalid password");
+        return true;
     }
 }

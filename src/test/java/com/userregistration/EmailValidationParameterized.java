@@ -3,9 +3,11 @@ package com.userregistration;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -55,6 +57,13 @@ public class EmailValidationParameterized {
 
     @Test
     public void givenEmail_IfProperByParameter() {
-        Assert.assertEquals(expected, userValidator.validateEmail(this.email));
+        try {
+            ExpectedException expectedException = ExpectedException.none();
+            expectedException.expect(UserValidationException.class);
+            Assert.assertEquals(expected, userValidator.validateEmail(this.email));
+        }catch(UserValidationException e){
+            PrintStream obj = new PrintStream(System.out);
+            e.printStackTrace(obj);
+        }
     }
 }
