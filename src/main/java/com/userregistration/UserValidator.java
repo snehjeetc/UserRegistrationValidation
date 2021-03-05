@@ -8,38 +8,34 @@ public class UserValidator {
     private final String VALID_PHONENUMBER_REGEX = "^(\\+?\\d{1,3}|\\d{1,4})\\s[1-9][0-9]{9}";
     private final String VALID_PASSWORD_REGEX = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=[^$@!#%*?&]*[$#@!%*?&][^$@!#%*?&]*$).{8,}";
 
+    private Validator validator = (regexp, charSequence) -> Pattern.compile(regexp).matcher(charSequence).matches();
 
     public boolean validateFirstName(String firstName) throws UserValidationException{
-        Pattern pattern = Pattern.compile(VALID_NAME_REGEX);
-        if(!pattern.matcher(firstName).matches())
+        if(!validator.isValid(VALID_NAME_REGEX, firstName))
             throw new UserValidationException(UserValidationException.ValidationExceptionType.INVALID_FIRST_NAME, "Invalid first name");
         return true;
     }
 
     public boolean validateLastName(String lastName) throws UserValidationException{
-        Pattern pattern = Pattern.compile(VALID_NAME_REGEX);
-        if(!pattern.matcher(lastName).matches())
+        if(!validator.isValid(VALID_NAME_REGEX, lastName))
             throw new UserValidationException(UserValidationException.ValidationExceptionType.INVALID_LAST_NAME, "Invalid last name");
         return true;
     }
 
     public boolean validateEmail(String email) throws UserValidationException{
-        Pattern pattern = Pattern.compile(VALID_EMAIL_REGEX);
-        if(!pattern.matcher(email).matches())
+        if(!validator.isValid(VALID_EMAIL_REGEX, email))
             throw new UserValidationException(UserValidationException.ValidationExceptionType.INVALID_EMAIL, "Invalid email id");
         return true;
     }
 
     public boolean validatePhoneNumber(String phoneNumber) throws UserValidationException{
-        Pattern pattern = Pattern.compile(VALID_PHONENUMBER_REGEX);
-        if(!pattern.matcher(phoneNumber).matches())
+        if(!validator.isValid(VALID_PHONENUMBER_REGEX, phoneNumber))
             throw new UserValidationException(UserValidationException.ValidationExceptionType.INVALID_PHONE_NUMBER, "Invalid phone number");
         return true;
     }
 
     public boolean validatePassword(String password) throws UserValidationException{
-        Pattern pattern = Pattern.compile(VALID_PASSWORD_REGEX);
-        if(!pattern.matcher(password).matches())
+        if(!validator.isValid(VALID_PASSWORD_REGEX, password))
             throw new UserValidationException(UserValidationException.ValidationExceptionType.INVALID_PASSWORD, "Invalid password");
         return true;
     }
