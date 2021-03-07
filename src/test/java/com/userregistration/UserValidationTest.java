@@ -2,6 +2,7 @@ package com.userregistration;
 
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
@@ -9,14 +10,19 @@ import java.io.PrintStream;
 
 
 public class UserValidationTest {
+    private UserValidator userValidator;
+
+    @Before
+    public void initialize(){
+        userValidator = new UserValidator();
+    }
 
     @Test
     public void givenFirstName_WhenProper_ShouldReturn_True() {
         try {
             ExpectedException expectedException = ExpectedException.none();
             expectedException.expect(UserValidationException.class);
-            UserValidator uservalidator = new UserValidator();
-            boolean result = uservalidator.validateFirstName("Snehjeet");
+            boolean result = userValidator.validateFirstName("Snehjeet");
             Assert.assertTrue(result);
         }catch(UserValidationException e){
             PrintStream obj = new PrintStream(System.out);
@@ -29,7 +35,6 @@ public class UserValidationTest {
         try {
             ExpectedException expectedException = ExpectedException.none();
             expectedException.expect(UserValidationException.class);
-            UserValidator userValidator = new UserValidator();
             boolean result = userValidator.validateFirstName("snehjeet");
             Assert.assertTrue(result);
         }catch(UserValidationException e){
@@ -43,7 +48,6 @@ public class UserValidationTest {
         try {
             ExpectedException expectedException = ExpectedException.none();
             expectedException.expect(UserValidationException.class);
-            UserValidator userValidator = new UserValidator();
             boolean result = userValidator.validateLastName("Na");
             Assert.assertTrue(result);
         }catch(UserValidationException e){
@@ -57,7 +61,6 @@ public class UserValidationTest {
         try {
             ExpectedException expectedException = ExpectedException.none();
             expectedException.expect(UserValidationException.class);
-            UserValidator userValidator = new UserValidator();
             boolean result = userValidator.validateLastName("Chatterjee");
             Assert.assertTrue(result);
         }catch(UserValidationException e){
@@ -71,8 +74,7 @@ public class UserValidationTest {
         try {
             ExpectedException expectedException = ExpectedException.none();
             expectedException.expect(UserValidationException.class);
-            UserValidator uservalidator = new UserValidator();
-            boolean result = uservalidator.validateEmail("abc.xyz@bl.co.in");
+            boolean result = userValidator.validateEmail("abc.xyz@bl.co.in");
             Assert.assertTrue(result);
         }catch(UserValidationException e){
             PrintStream obj = new PrintStream(System.out);
@@ -85,7 +87,6 @@ public class UserValidationTest {
         try {
             ExpectedException expectedException = ExpectedException.none();
             expectedException.expect(UserValidationException.class);
-            UserValidator userValidator = new UserValidator();
             boolean result = userValidator.validateEmail("abc.@gmail.com");
             Assert.assertTrue(result);
         }catch(UserValidationException e){
@@ -99,8 +100,7 @@ public class UserValidationTest {
         try {
             ExpectedException expectedException = ExpectedException.none();
             expectedException.expect(UserValidationException.class);
-            UserValidator uservalidator = new UserValidator();
-            boolean result = uservalidator.validatePhoneNumber("91 9919819801");
+            boolean result = userValidator.validatePhoneNumber("91 9919819801");
             Assert.assertTrue(result);
         }catch(UserValidationException e){
             PrintStream obj = new PrintStream(System.out);
@@ -113,7 +113,6 @@ public class UserValidationTest {
         try {
             ExpectedException expectedException = ExpectedException.none();
             expectedException.expect(UserValidationException.class);
-            UserValidator userValidator = new UserValidator();
             boolean result = userValidator.validatePhoneNumber("919999998888");
             Assert.assertTrue(result);
         }catch(UserValidationException e){
@@ -127,7 +126,6 @@ public class UserValidationTest {
         try {
             ExpectedException expectedException = ExpectedException.none();
             expectedException.expect(UserValidationException.class);
-            UserValidator userValidator = new UserValidator();
             boolean result = userValidator.validatePassword("abcA#12foRca");
             Assert.assertTrue(result);
         }catch(UserValidationException e){
@@ -141,7 +139,6 @@ public class UserValidationTest {
         try {
             ExpectedException expectedException = ExpectedException.none();
             expectedException.expect(UserValidationException.class);
-            UserValidator userValidator = new UserValidator();
             boolean result = userValidator.validatePassword("abc123di");
             Assert.assertTrue(result);
         }catch(UserValidationException e){
